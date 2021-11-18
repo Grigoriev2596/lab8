@@ -13,9 +13,8 @@ public class SmilebusHomePage {
     private static final String HOMEPAGE_URL = "https://618.by";
     private static final String LOCATION_INPUT_FROM_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div[2]";
     private static final String LOCATION_INPUT_TO_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div[2]";
-    private static final String LOCATION_TO_RECHICA_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div[3]/ul/li[3]/span";
+    private static final String LOCATION_TO_RECHICA_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div[3]/ul/li[9]/span";
     private static final String LOCATION_FROM_GOMEL_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div[3]/ul/li[6]/span";
-    private static final String FIND_BUTTON_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/button";
 
     private WebDriver driver;
 
@@ -52,16 +51,7 @@ public class SmilebusHomePage {
         return this;
     }
 
-    public SmilebusHomePage findRoute() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(FIND_BUTTON_XPATH))).click();
-        return this;
-    }
-
     public boolean checkRoutesFromGomelToRechica() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'el-title__text') and contains(string(), \"Рейсы не найдены\")]")));
-        if (driver.findElement(By.xpath("//div[contains(@class, 'el-title__text') and contains(string(), \"Рейсы не найдены\")]")) != null ) return true;
         boolean ifLocationsAreGomelAndRechica = true;
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1] ")));

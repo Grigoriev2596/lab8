@@ -27,7 +27,6 @@ public class WebDriverSmilebusTest {
                  .openLocationToForm()
                  .chooseGomelStartLocation()
                  .chooseRechicaEndLocation()
-                 .findRoute()
                  .checkRoutesFromGomelToRechica();
         Assert.assertTrue(expected);
     }
