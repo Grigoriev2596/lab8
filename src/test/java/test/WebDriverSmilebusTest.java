@@ -17,6 +17,9 @@ public class WebDriverSmilebusTest {
         options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--start-maximized");
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
+        options.add_argument("--disable-blink-features=AutomationControlled")
         driver = new ChromeDriver(options);
     }
     @Test
