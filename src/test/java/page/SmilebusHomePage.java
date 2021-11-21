@@ -13,8 +13,8 @@ public class SmilebusHomePage {
     private static final String HOMEPAGE_URL = "https://618.by";
     private static final String LOCATION_INPUT_FROM_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div[2]";
     private static final String LOCATION_INPUT_TO_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div[2]";
-    private static final String LOCATION_TO_RECHICA_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[2]/div/div[2]/div/div[3]/ul/li[9]/span";
-    private static final String LOCATION_FROM_GOMEL_XPATH = "//*[@id=\"__layout\"]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div[3]/ul/li[6]/span";
+    private static final String LOCATION_TO_RECHICA_XPATH = "//div[contains(@class, 'el-grid-col el-grid-col--span-12 el-grid-col--span-m-6 el-grid-col--span-l-3')][2]//span[contains(text(), 'Речица')]/parent::span";
+    private static final String LOCATION_FROM_GOMEL_XPATH = "//div[contains(@class, 'el-grid-col el-grid-col--span-12 el-grid-col--span-m-6 el-grid-col--span-l-3')][1]//span[contains(text(), 'Гомель')]/parent::span";
 
     private WebDriver driver;
 
@@ -47,15 +47,21 @@ public class SmilebusHomePage {
 
     public SmilebusHomePage chooseRechicaEndLocation() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOCATION_TO_RECHICA_XPATH))).click();
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(LOCATION_TO_RECHICA_XPATH))).click();
         return this;
     }
 
     public boolean checkRoutesFromGomelToRechica() {
-        boolean ifLocationsAreGomelAndRechica = true;
         new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1] ")));
-        List<WebElement> locationFromList = driver.findElements(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1] "));
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'search-page')][1]")));
+        if (driver.findElement(By.xpath("//div[contains(text(), 'Рейсы не найдены')]")) != null)
+            return true;
+
+        boolean ifLocationsAreGomelAndRechica = true;
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]")));
+        List<WebElement> locationFromList = driver.findElements(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]"));
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]")));
         List<WebElement> locationToList = driver.findElements(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]"));

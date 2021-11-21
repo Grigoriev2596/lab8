@@ -32,7 +32,7 @@ public class WebDriverSmilebusTest {
     }
     @AfterMethod(alwaysRun = true)
     public void browserTearDown() {
-       driver.quit();
+        driver.quit();
         driver = null;
     }
 }
