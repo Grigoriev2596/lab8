@@ -24,8 +24,6 @@ public class SmilebusHomePage {
 
     public SmilebusHomePage openPage() {
         driver.get(HOMEPAGE_URL);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"__layout\"]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div/div[3]/span[2]/span"))).click();
         return this;
     }
 
