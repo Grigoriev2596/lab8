@@ -24,6 +24,8 @@ public class SmilebusHomePage {
 
     public SmilebusHomePage openPage() {
         driver.get(HOMEPAGE_URL);
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"__layout\"]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div/div[3]/span[2]/span"))).click();
         return this;
     }
 
@@ -52,13 +54,7 @@ public class SmilebusHomePage {
     }
 
     public boolean checkRoutesFromGomelToRechica() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'search-page')][1]")));
-        if (driver.findElement(By.xpath("//div[contains(text(), 'Рейсы не найдены')]")) != null)
-            return true;
-
         boolean ifLocationsAreGomelAndRechica = true;
-
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]")));
         List<WebElement> locationFromList = driver.findElements(By.xpath("//div[@class='pt-item-tour']/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]"));
